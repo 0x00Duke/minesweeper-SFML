@@ -9,6 +9,7 @@
 #include "../include/systems/miner.hpp"
 #include "../include/systems/background.hpp"
 #include "../include/systems/map.hpp"
+#include "../include/systems/winLoose.hpp"
 #include "../include/components/tile.hpp"
 #include <time.h>
 
@@ -79,6 +80,10 @@ void initSignatures()
     signatureMap.set(gCoordinator.GetComponentType<Drawable>());
     signatureMap.set(gCoordinator.GetComponentType<Tile>());
     gCoordinator.SetSystemSignature<MapSystem>(signatureMap);
+
+    Signature signatureWinLoose;
+    signatureWinLoose.set(gCoordinator.GetComponentType<Tile>());
+    gCoordinator.SetSystemSignature<WinLooseSystem>(signatureWinLoose);
 }
 
 void initMap()
@@ -146,6 +151,7 @@ void Game::run()
     auto movementSystem = gCoordinator.RegisterSystem<MovementSystem>();
     auto backgroundSystem = gCoordinator.RegisterSystem<newBackgroundSystem>();
     auto mapSystem = gCoordinator.RegisterSystem<MapSystem>();
+    auto winLooseSystem = gCoordinator.RegisterSystem<WinLooseSystem>();
 
 
     // create the window
@@ -172,5 +178,7 @@ void Game::run()
         drawSystem->DrawEntities(&window);
 
         window.display();
+
+        winLooseSystem->update(event, &window);
     }
 }

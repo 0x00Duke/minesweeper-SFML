@@ -11,7 +11,7 @@ enable_testing()
 #------------------------------------------------------------
 
 if(APPLE)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
   set_target_properties(PROPERTIES CXX_STANDARD 98 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO)
   message("Building for Apple")
 else()
@@ -26,6 +26,7 @@ set(SOURCES
   src/systems/miner.cpp
   src/systems/background.cpp
   src/systems/map.cpp
+  src/systems/winLoose.cpp
 )
 
 include_directories(. build/_deps/eecsge-src)
