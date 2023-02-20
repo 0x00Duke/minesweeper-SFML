@@ -23,6 +23,7 @@ endif(APPLE)
 set(SOURCES
   src/main.cpp
   src/game.cpp
+  src/init.cpp
   src/systems/miner.cpp
   src/systems/background.cpp
   src/systems/map.cpp
