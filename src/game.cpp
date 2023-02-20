@@ -126,8 +126,8 @@ void initMap()
                                                   .position = sf::Vector2f(i * 32, j * 32),
                                                   .scale = sf::Vector2f(1, 1)});
             gCoordinator.AddComponent(tile, Drawable{
-                                                  .sprite = s,
                                                   .texture = t,
+                                                  .sprite = s,
                                                   .rect = sf::IntRect(sgrid[i][j]*32, 0, 32, 32)});
             gCoordinator.AddComponent(tile, Movement{
                                                   .velocity = sf::Vector2f(0, 0),
