@@ -25,6 +25,7 @@ set(SOURCES
   src/game.cpp
   src/systems/miner.cpp
   src/systems/background.cpp
+  src/systems/map.cpp
 )
 
 include_directories(. build/_deps/eecsge-src)
