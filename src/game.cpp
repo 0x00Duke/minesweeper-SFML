@@ -39,8 +39,8 @@ void initBackground()
                                               .scale = sf::Vector2f(1, 1)});
 
     gCoordinator.AddComponent(background, Drawable{
-                                              .sprite = sprite,
-                                              .texture = texture});
+                                                .texture = texture,
+                                                .sprite = sprite});
     gCoordinator.AddComponent(background, Movement{
                                               .velocity = sf::Vector2f(-0.5, 0),
                                               .acceleration = sf::Vector2f(0, 0)});
