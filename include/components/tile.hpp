@@ -11,5 +11,6 @@ struct Tile
 {
     int value;
     int sValue;
-    int x, y;
+    int x;
+    int y;
 };

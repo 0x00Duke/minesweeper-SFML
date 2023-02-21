@@ -29,9 +29,9 @@ void initMiner()
 {
     Entity miner = gCoordinator.CreateEntity();
     gCoordinator.AddComponent(miner, Click {
-                                    .button = sf::Mouse::Button::ButtonCount,
-                                    .x = 0,
-                                    .y = 0});
+                                    sf::Mouse::Button::ButtonCount,
+                                    0,
+                                    0});
 }
 
 void Game::run()
