@@ -9,8 +9,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include "include/events/Input.hpp"
 
 extern Coordinator gCoordinator;
+
+void MapSystem::init()
+{
+    gCoordinator.AddListener(METHOD_LISTENER(Events::Inputs::CLICK, MapSystem::clickHandler));
+}
 
 void MapSystem::update(sf::Event event, sf::RenderWindow *window)
 {
@@ -18,15 +24,17 @@ void MapSystem::update(sf::Event event, sf::RenderWindow *window)
 		auto& drawable = gCoordinator.GetComponent<Drawable>(entity);
         auto& tile = gCoordinator.GetComponent<Tile>(entity);
 
-        sf::Vector2i pos = sf::Mouse::getPosition(*window);
-        int x = pos.x/32;
-        int y = pos.y/32;
-
-        if (event.type == sf::Event::MouseButtonPressed)
-            if (x == tile.x && y == tile.y)
-                if (event.key.code == sf::Mouse::Left) tile.sValue=tile.value;
-                else if (event.key.code == sf::Mouse::Right) tile.sValue=11;
+        if (x == tile.x && y == tile.y)
+            if (button == sf::Mouse::Left) tile.sValue=tile.value;
+            else if (button == sf::Mouse::Right) tile.sValue=11;
 
         drawable.sprite.setTextureRect(sf::IntRect(tile.sValue * 32, 0, 32, 32));
     }
+}
+
+void MapSystem::clickHandler(Event &event)
+{
+    x = event.GetParam<int>(Events::Inputs::Click::X) / 32;
+    y = event.GetParam<int>(Events::Inputs::Click::Y) / 32;
+    button = event.GetParam<sf::Mouse::Button>(Events::Inputs::Click::BUTTON);
 }

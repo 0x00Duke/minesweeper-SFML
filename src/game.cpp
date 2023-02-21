@@ -25,6 +25,15 @@ Game::~Game()
 {
 }
 
+void initMiner()
+{
+    Entity miner = gCoordinator.CreateEntity();
+    gCoordinator.AddComponent(miner, Click {
+                                    .button = sf::Mouse::Button::ButtonCount,
+                                    .x = 0,
+                                    .y = 0});
+}
+
 void Game::run()
 {
 
@@ -46,6 +55,9 @@ void Game::run()
     initBackground();
     // create the map
     initMap();
+    mapSystem->init();
+
+    initMiner();
 
     while (window.isOpen()) {
         sf::Event event;
@@ -55,7 +67,7 @@ void Game::run()
         }
 
         window.clear();
-        // playerSystem->update(event);
+        minerSystem->update(event);
         // movementSystem->update(event);
         backgroundSystem->update(event);
         mapSystem->update(event, &window);

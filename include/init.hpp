@@ -8,6 +8,7 @@
 #pragma once
 
 #include "include/components/tile.hpp"
+#include "include/components/click.hpp"
 #include "include/systems/background.hpp"
 #include "include/systems/map.hpp"
 #include "include/systems/winLoose.hpp"
