@@ -5,7 +5,6 @@
 ** init.cpp
 */
 
-
 #include "include/init.hpp"
 
 extern Coordinator gCoordinator;
@@ -21,15 +20,17 @@ void initBackground()
     sf::Sprite sprite(*texture);
 
     gCoordinator.AddComponent(background, Transform{
-                                              .position = sf::Vector2f(0, 0),
-                                              .scale = sf::Vector2f(1, 1)});
+                                              sf::Vector2f(0, 0),
+                                              sf::Vector2f(0, 0),
+                                              sf::Vector2f(0, 0),
+                                              sf::Vector2f(1, 1)});
 
     gCoordinator.AddComponent(background, Drawable{
-                                                .texture = texture,
-                                                .sprite = sprite});
+                                              texture,
+                                              sprite});
     gCoordinator.AddComponent(background, Movement{
-                                              .velocity = sf::Vector2f(-0.5, 0),
-                                              .acceleration = sf::Vector2f(0, 0)});
+                                              sf::Vector2f(-0.5, 0),
+                                              sf::Vector2f(0, 0)});
 }
 
 void initSignatures()
@@ -77,54 +78,69 @@ void initSignatures()
 void initMap()
 {
     int grid[12][12];
-    int sgrid[12][12]; //for showing
+    int sgrid[12][12]; // for showing
 
-    for (int i=1; i <= 10; i++) {
-        for (int j=1; j <= 10; j++) {
-          sgrid[i][j]=10;
-          if (rand()%5==0)  grid[i][j]=9;
-          else grid[i][j]=0;
+    for (int i = 1; i <= 10; i++) {
+        for (int j = 1; j <= 10; j++) {
+            sgrid[i][j] = 10;
+            if (rand() % 5 == 0)
+                grid[i][j] = 9;
+            else
+                grid[i][j] = 0;
         }
     }
 
-    for (int i=1;i<=10;i++) {
-        for (int j=1;j<=10;j++) {
-            int n=0;
-            if (grid[i][j]==9) continue;
-            if (grid[i+1][j]==9) n++;
-            if (grid[i][j+1]==9) n++;
-            if (grid[i-1][j]==9) n++;
-            if (grid[i][j-1]==9) n++;
-            if (grid[i+1][j+1]==9) n++;
-            if (grid[i-1][j-1]==9) n++;
-            if (grid[i-1][j+1]==9) n++;
-            if (grid[i+1][j-1]==9) n++;
-            grid[i][j]=n;
+    for (int i = 1; i <= 10; i++)
+    {
+        for (int j = 1; j <= 10; j++)
+        {
+            int n = 0;
+            if (grid[i][j] == 9)
+                continue;
+            if (grid[i + 1][j] == 9)
+                n++;
+            if (grid[i][j + 1] == 9)
+                n++;
+            if (grid[i - 1][j] == 9)
+                n++;
+            if (grid[i][j - 1] == 9)
+                n++;
+            if (grid[i + 1][j + 1] == 9)
+                n++;
+            if (grid[i - 1][j - 1] == 9)
+                n++;
+            if (grid[i - 1][j + 1] == 9)
+                n++;
+            if (grid[i + 1][j - 1] == 9)
+                n++;
+            grid[i][j] = n;
         }
     }
 
-    for (int i=1; i <= 10; i++) {
-        for (int j=1; j <= 10; j++) {
+    for (int i = 1; i <= 10; i++) {
+        for (int j = 1; j <= 10; j++) {
             sf::Texture *t = new sf::Texture();
             if (!t->loadFromFile("images/tiles.jpg"))
                 std::cout << "Error loading tiles" << std::endl;
             sf::Sprite s(*t);
             Entity tile = gCoordinator.CreateEntity();
             gCoordinator.AddComponent(tile, Transform{
-                                                  .position = sf::Vector2f(i * 32, j * 32),
-                                                  .scale = sf::Vector2f(1, 1)});
+                                                sf::Vector2f(i * 32, j * 32),
+                                                sf::Vector2f(0, 0),
+                                                sf::Vector2f(0, 0),
+                                                sf::Vector2f(1, 1)});
             gCoordinator.AddComponent(tile, Drawable{
-                                                  .texture = t,
-                                                  .sprite = s,
-                                                  .rect = sf::IntRect(sgrid[i][j]*32, 0, 32, 32)});
+                                                t,
+                                                s,
+                                                sf::IntRect(sgrid[i][j] * 32, 0, 32, 32)});
             gCoordinator.AddComponent(tile, Movement{
-                                                  .velocity = sf::Vector2f(0, 0),
-                                                  .acceleration = sf::Vector2f(0, 0)});
+                                                sf::Vector2f(0, 0),
+                                                sf::Vector2f(0, 0)});
             gCoordinator.AddComponent(tile, Tile{
-                                                  .value = grid[i][j],
-                                                  .sValue = sgrid[i][j],
-                                                  .x = i,
-                                                  .y = j});
+                                                grid[i][j],
+                                                sgrid[i][j],
+                                                i,
+                                                j});
         }
     }
 }

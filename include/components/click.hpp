@@ -20,5 +20,6 @@ struct Click
 {
     sf::Mouse::Button button;
 
-    int x, y;
+    int x;
+    int y;
 };
