@@ -27,7 +27,8 @@ void initBackground()
 
     gCoordinator.AddComponent(background, Drawable{
                                               texture,
-                                              sprite});
+                                              sprite,
+                                              sf::IntRect(0, 0, 5149, 3433)});
     gCoordinator.AddComponent(background, Movement{
                                               sf::Vector2f(-0.5, 0),
                                               sf::Vector2f(0, 0)});
