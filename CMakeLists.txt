@@ -30,6 +30,15 @@ set(SOURCES
   src/systems/winLoose.cpp
 )
 
+set(SOURCE_CLI
+  Client/src/main.cpp
+  Client/src/Client.cpp
+  Client/src/inits.cpp
+  Client/src/systems/background.cpp
+  Client/src/systems/miner.cpp
+  Client/src/listeners/ClickListener.cpp
+)
+
 include_directories(. build/_deps/eecsge-src)
 
 # BOOST
@@ -67,8 +76,10 @@ FetchContent_Declare(GTEST
 FetchContent_MakeAvailable(GTEST)
 
 add_executable(Demo ${SOURCES})
+add_executable(Client ${SOURCE_CLI})
 
 target_link_libraries(Demo sfml-audio sfml-graphics sfml-system sfml-window eecsge)
+target_link_libraries(Client sfml-audio sfml-graphics sfml-system sfml-window eecsge)
 
 
 # Testing
