@@ -40,6 +40,7 @@ void initSignatures()
     gCoordinator.RegisterComponent<InputKeys>();
     gCoordinator.RegisterComponent<Drawable>();
     gCoordinator.RegisterComponent<Tile>();
+    gCoordinator.RegisterComponent<Click>();
 
     // set the signature of the systems
     Signature Msignature;
@@ -53,9 +54,10 @@ void initSignatures()
     gCoordinator.SetSystemSignature<DrawSystem>(Dsignature);
 
     Signature signatureMiner;
-    signatureMiner.set(gCoordinator.GetComponentType<InputKeys>());
-    signatureMiner.set(gCoordinator.GetComponentType<Movement>());
-    signatureMiner.set(gCoordinator.GetComponentType<Transform>());
+    // signatureMiner.set(gCoordinator.GetComponentType<InputKeys>());
+    // signatureMiner.set(gCoordinator.GetComponentType<Movement>());
+    // signatureMiner.set(gCoordinator.GetComponentType<Transform>());
+    signatureMiner.set(gCoordinator.GetComponentType<Click>());
     gCoordinator.SetSystemSignature<MinerSystem>(signatureMiner);
 
     Signature signatureBackground;
