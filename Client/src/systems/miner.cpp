@@ -15,7 +15,7 @@ void MinerSystem::update(sf::Event event)
     for (auto entity : mEntities) {
         auto &click = gCoordinator.GetComponent<Click>(entity);
 
-        if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.type == sf::Event::MouseButtonReleased) {
 
             Event newEvent(Events::Inputs::CLICK);
             newEvent.SetParam(Events::Inputs::Click::X, event.mouseButton.x);

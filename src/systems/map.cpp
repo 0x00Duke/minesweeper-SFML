@@ -29,7 +29,6 @@ void MapSystem::update(sf::Event event, sf::RenderWindow *window)
             else if (button == sf::Mouse::Right) tile.sValue=11;
 
         drawable.rect = sf::IntRect(tile.sValue * 32, 0, 32, 32);
-        // drawable.sprite.setTextureRect(sf::IntRect(tile.sValue * 32, 0, 32, 32));
     }
 }
 

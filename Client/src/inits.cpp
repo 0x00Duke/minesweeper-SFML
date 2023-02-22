@@ -36,6 +36,11 @@ void initSignatures()
     Signature signatureMiner;
     signatureMiner.set(gCoordinator.GetComponentType<Click>());
     gCoordinator.SetSystemSignature<MinerSystem>(signatureMiner);
+
+    Signature signatureMap;
+    signatureMap.set(gCoordinator.GetComponentType<Tile>());
+    signatureMap.set(gCoordinator.GetComponentType<Drawable>());
+    gCoordinator.SetSystemSignature<MapSystem>(signatureMap);
 }
 
 void initBackground()

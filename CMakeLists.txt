@@ -36,7 +36,9 @@ set(SOURCE_CLI
   Client/src/inits.cpp
   Client/src/systems/background.cpp
   Client/src/systems/miner.cpp
+  Client/src/systems/map.cpp
   Client/src/listeners/ClickListener.cpp
+  Client/src/listeners/RevealTile.cpp
 )
 
 include_directories(. build/_deps/eecsge-src)

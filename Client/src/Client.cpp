@@ -16,7 +16,7 @@ Client::Client()
     movementSystem = gCoordinator.RegisterSystem<MovementSystem>();
     backgroundSystem = gCoordinator.RegisterSystem<newBackgroundSystem>();
     minerSystem = gCoordinator.RegisterSystem<MinerSystem>();
-    // mapSystem = gCoordinator.RegisterSystem<MapSystem>();
+    mapSystem = gCoordinator.RegisterSystem<MapSystem>();
 
     initSignatures();
 }
@@ -40,15 +40,37 @@ void Client::run()
     ClickListener clickListener;
     clickListener.init();
 
+    RevealTileListener revealTileListener;
+    revealTileListener.init(mapSystem);
+
+    // int x = 1;
+    // int y = 1;
+    // int value = 0;
+
+    sf::Event event; 
     while (window.isOpen()) {
-        sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 window.close();
+            // if (event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                // Event newEvent(Events::RevealTile::REVEAL);
+                // newEvent.SetParam(Events::RevealTile::Reveal::X, x);
+                // newEvent.SetParam(Events::RevealTile::Reveal::Y, y);
+                // newEvent.SetParam(Events::RevealTile::Reveal::VALUE, 1);
+                // gCoordinator.SendEvent(newEvent);
+                // if (x == 10) {
+                    // x = 1;
+                    // y++;
+                // } else {
+                    // x++;
+                // }
+            // }
+            minerSystem->update(event);
         }
+
         window.clear();
-        backgroundSystem->update(event);
-        minerSystem->update(event);
+        backgroundSystem->update();
+        mapSystem->update();
         drawSystem->DrawEntities(&window);
         window.display();
     }
