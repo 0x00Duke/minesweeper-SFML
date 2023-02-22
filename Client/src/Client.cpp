@@ -28,7 +28,7 @@ Client::~Client()
 void Client::run()
 {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(400, 400), "Minesweeper");
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Minesweeper");
 
     // create the background
     initBackground();
@@ -64,8 +64,9 @@ void Client::run()
                 // } else {
                     // x++;
                 // }
+            // } else {
+                minerSystem->update(event);
             // }
-            minerSystem->update(event);
         }
 
         window.clear();

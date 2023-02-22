@@ -19,7 +19,7 @@ void ClickListener::clickHandler(Event &event)
     // TODO: send click to server
 
     std::cout << "click: " << std::endl;
-    std::cout << "x: " << event.GetParam<int>(Events::Inputs::Click::X) / 32 << std::endl;
-    std::cout << "y: " << event.GetParam<int>(Events::Inputs::Click::Y) / 32 << std::endl;
+    std::cout << "x: " << event.GetParam<int>(Events::Inputs::Click::X) << std::endl;
+    std::cout << "y: " << event.GetParam<int>(Events::Inputs::Click::Y) << std::endl;
     std::cout << "button: " << event.GetParam<sf::Mouse::Button>(Events::Inputs::Click::BUTTON) << std::endl;
 }

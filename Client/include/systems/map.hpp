@@ -11,6 +11,7 @@
 
 #include "../components/tile.hpp"
 #include "../events/RevealTile.hpp"
+#include "../macros.hpp"
 
 class MapSystem : public System {
     public:
