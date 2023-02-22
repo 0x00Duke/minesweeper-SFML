@@ -16,5 +16,5 @@
 
 class newBackgroundSystem : public System {
     public:
-        void update(sf::Event event);
+        void update();
 };

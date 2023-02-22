@@ -9,7 +9,7 @@
 
 extern Coordinator gCoordinator;
 
-void newBackgroundSystem::update(sf::Event event)
+void newBackgroundSystem::update()
 {
     for (auto entity : mEntities) {
         auto &transform = gCoordinator.GetComponent<Transform>(entity);

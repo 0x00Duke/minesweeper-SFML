@@ -11,7 +11,7 @@
 #include "components/click.hpp"
 #include "systems/background.hpp"
 #include "systems/miner.hpp"
-// #include "systems/map.hpp"
+#include "systems/map.hpp"
 // #include "systems/winLoose.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

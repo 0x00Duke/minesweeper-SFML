@@ -16,8 +16,10 @@
 #include <EECSGE/EECSGE.hpp>
 
 #include "inits.hpp"
+#include "systems/map.hpp"
 #include "events/Input.hpp"
 #include "listeners/ClickListener.hpp"
+#include "listeners/RevealTile.hpp"
 
 class Client
 {
@@ -27,7 +29,7 @@ private:
     std::shared_ptr<MovementSystem> movementSystem;
     std::shared_ptr<newBackgroundSystem> backgroundSystem;
     std::shared_ptr<MinerSystem> minerSystem;
-    // std::shared_ptr<MapSystem> mapSystem;
+    std::shared_ptr<MapSystem> mapSystem;
 public:
     Client(/* args */);
     ~Client();
