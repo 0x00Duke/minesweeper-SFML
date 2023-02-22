@@ -12,6 +12,9 @@
 #include "systems/background.hpp"
 #include "systems/miner.hpp"
 #include "systems/map.hpp"
+
+#include "macros.hpp"
+
 // #include "systems/winLoose.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

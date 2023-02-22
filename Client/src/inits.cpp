@@ -48,7 +48,7 @@ void initBackground()
     Entity background = gCoordinator.CreateEntity();
     sf::Texture *texture = new sf::Texture();
 
-    if (!texture->loadFromFile("images/bg.jpg"))
+    if (!texture->loadFromFile(BG_PATH))
         std::cout << "Error loading background" << std::endl;
 
     sf::Sprite sprite(*texture);
@@ -58,11 +58,10 @@ void initBackground()
                                               sf::Vector2f(0, 0),
                                               sf::Vector2f(0, 0),
                                               sf::Vector2f(1, 1)});
-
     gCoordinator.AddComponent(background, Drawable{
                                               texture,
                                               sprite,
-                                              sf::IntRect(0, 0, 5149, 3433)});
+                                              sf::IntRect(0, 0, BG_WIDTH, BG_HEIGHT)});
     gCoordinator.AddComponent(background, Movement{
                                               sf::Vector2f(-0.5, 0),
                                               sf::Vector2f(0, 0)});
@@ -73,15 +72,17 @@ void initTiles()
     for (int i = 1; i <= 10; i++) {
         for (int j = 1; j <= 10; j++) {
             sf::Texture *t = new sf::Texture();
-            if (!t->loadFromFile("images/tiles.jpg"))
+            if (!t->loadFromFile(TILE_PATH))
                 std::cout << "Error loading tiles" << std::endl;
+
             sf::Sprite s(*t);
             Entity tile = gCoordinator.CreateEntity();
+
             gCoordinator.AddComponent(tile, Transform{
-                                                sf::Vector2f(i * 32, j * 32),
+                                                sf::Vector2f(i * SIZE_TILE, j * SIZE_TILE),
                                                 sf::Vector2f(0, 0),
                                                 sf::Vector2f(0, 0),
-                                                sf::Vector2f(1, 1)});
+                                                sf::Vector2f(2, 2)});
             gCoordinator.AddComponent(tile, Drawable{
                                                 t,
                                                 s,

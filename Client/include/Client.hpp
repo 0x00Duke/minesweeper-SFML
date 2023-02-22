@@ -20,6 +20,7 @@
 #include "events/Input.hpp"
 #include "listeners/ClickListener.hpp"
 #include "listeners/RevealTile.hpp"
+#include "macros.hpp"
 
 class Client
 {
