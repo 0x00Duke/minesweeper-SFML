@@ -12,6 +12,7 @@
 #include "systems/background.hpp"
 #include "systems/miner.hpp"
 #include "systems/map.hpp"
+#include "systems/movement.hpp"
 
 #include "macros.hpp"
 
@@ -19,7 +20,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-#include <EECSGE/EECSGE.hpp>
+
+#include <EECSGE/Core.hpp>
+#include <EECSGE/Graphics.hpp>
+#include <EECSGE/Physics.hpp>
 
 void initSignatures();
 void initBackground();

@@ -12,7 +12,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-#include <EECSGE/EECSGE.hpp>
+#include <EECSGE/Core.hpp>
+#include <EECSGE/Graphics.hpp>
+
+#include <EECSGE/Physics.hpp>
 
 class newBackgroundSystem : public System {
     public:

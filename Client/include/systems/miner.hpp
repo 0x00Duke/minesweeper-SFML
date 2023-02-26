@@ -8,7 +8,10 @@
 #pragma once
 
 #include <iostream>
-#include <EECSGE/EECSGE.hpp>
+#include <EECSGE/Core.hpp>
+#include <EECSGE/Graphics.hpp>
+
+#include <EECSGE/Physics.hpp>
 #include "../events/Input.hpp"
 
 

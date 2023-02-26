@@ -20,7 +20,7 @@ void MapSystem::update()
             drawable.rect = sf::IntRect(tile.value * 32, 0, 32, 32);
             x = -1;
             y = -1;
-            value = 0;
+            value = -1;
         }
     }
 }
