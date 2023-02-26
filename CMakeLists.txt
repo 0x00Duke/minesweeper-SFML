@@ -41,7 +41,17 @@ set(SOURCE_CLI
   Client/src/listeners/RevealTile.cpp
 )
 
-include_directories(. build/_deps/eecsge-src)
+set(SOURCE_SERVER
+  Server/src/main.cpp
+  Server/src/Server.cpp
+  Server/src/inits.cpp
+  Server/src/systems/map.cpp
+  Server/src/listeners/RevealTile.cpp
+  Server/src/tools/initGrid.cpp
+  Server/src/tools/inRange.cpp
+)
+
+include_directories(. include)
 
 # BOOST
 #------------------------------------------------------------
@@ -77,11 +87,13 @@ FetchContent_Declare(GTEST
     GIT_TAG v1.13.x)
 FetchContent_MakeAvailable(GTEST)
 
-add_executable(Demo ${SOURCES})
+# add_executable(Demo ${SOURCES})
 add_executable(Client ${SOURCE_CLI})
+add_executable(Server ${SOURCE_SERVER})
 
-target_link_libraries(Demo sfml-audio sfml-graphics sfml-system sfml-window eecsge)
-target_link_libraries(Client sfml-audio sfml-graphics sfml-system sfml-window eecsge)
+# target_link_libraries(Demo sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
+target_link_libraries(Client sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
+target_link_libraries(Server sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
 
 
 # Testing

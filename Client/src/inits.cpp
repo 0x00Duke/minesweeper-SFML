@@ -17,9 +17,6 @@ void initSignatures()
     gCoordinator.RegisterComponent<Click>();
 
     // set the signature of the systems
-    Signature Msignature;
-    Msignature.set(gCoordinator.GetComponentType<RigidBody>());
-    gCoordinator.SetSystemSignature<MovementSystem>(Msignature);
 
     Signature Dsignature;
     Dsignature.set(gCoordinator.GetComponentType<RigidBody>());
