@@ -20,16 +20,6 @@ endif(APPLE)
 # Client sources and includes
 #------------------------------------------------------------
 
-set(SOURCES
-  src/main.cpp
-  src/game.cpp
-  src/init.cpp
-  src/systems/miner.cpp
-  src/systems/background.cpp
-  src/systems/map.cpp
-  src/systems/winLoose.cpp
-)
-
 set(SOURCE_CLI
   Client/src/main.cpp
   Client/src/Client.cpp
@@ -87,11 +77,10 @@ FetchContent_Declare(GTEST
     GIT_TAG v1.13.x)
 FetchContent_MakeAvailable(GTEST)
 
-# add_executable(Demo ${SOURCES})
+#------------------------------------------------------------
 add_executable(Client ${SOURCE_CLI})
 add_executable(Server ${SOURCE_SERVER})
 
-# target_link_libraries(Demo sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
 target_link_libraries(Client sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
 target_link_libraries(Server sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
 
