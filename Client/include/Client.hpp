@@ -13,10 +13,14 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
-#include <EECSGE/EECSGE.hpp>
+
+#include <EECSGE/Core.hpp>
+#include <EECSGE/Graphics.hpp>
+#include <EECSGE/Physics.hpp>
 
 #include "inits.hpp"
 #include "systems/map.hpp"
+#include "systems/movement.hpp"
 #include "events/Input.hpp"
 #include "listeners/ClickListener.hpp"
 #include "listeners/RevealTile.hpp"
