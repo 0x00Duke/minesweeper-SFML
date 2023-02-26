@@ -20,7 +20,7 @@ class RevealTileListener {
     public:
         void init(std::shared_ptr<MapSystem> mapSystem);
     private:
-        void callMapSystem(Event &event);
+        void callMapSystem(eecsge::Event &event);
         std::shared_ptr<MapSystem> _mapSystem;
 
 };

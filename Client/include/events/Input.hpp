@@ -7,19 +7,20 @@
 
 #pragma once
 
+#include <iostream>
+
 #include <EECSGE/Core.hpp>
 #include <EECSGE/Graphics.hpp>
-
 #include <EECSGE/Physics.hpp>
 
 namespace Events::Inputs
 {
-    const EventId CLICK = "ClickEvent"_hash;
+    const eecsge::EventId CLICK = std::hash<std::string>{}("ClickEvent");
 } // namespace Events::Inputs
 
 namespace Events::Inputs::Click
 {
-    const ParamId BUTTON = "clickButton"_hash;
-    const ParamId X = "clickPosX"_hash;
-    const ParamId Y = "clickPosY"_hash;
+    const eecsge::ParamId BUTTON = std::hash<std::string>{}("clickButton");
+    const eecsge::ParamId X = std::hash<std::string>{}("clickPosX");
+    const eecsge::ParamId Y = std::hash<std::string>{}("clickPosY");
 } // namespace Events::Inputs::::Click

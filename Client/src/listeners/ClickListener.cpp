@@ -7,14 +7,14 @@
 
 #include "../../include/listeners/ClickListener.hpp"
 
-extern Coordinator gCoordinator;
+extern eecsge::Coordinator gCoordinator;
 
 void ClickListener::init()
 {
     gCoordinator.AddListener(METHOD_LISTENER(Events::Inputs::CLICK, ClickListener::clickHandler));
 }
 
-void ClickListener::clickHandler(Event &event)
+void ClickListener::clickHandler(eecsge::Event &event)
 {
     // TODO: send click to server
 

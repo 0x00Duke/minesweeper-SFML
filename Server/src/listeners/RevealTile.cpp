@@ -7,7 +7,7 @@
 
 #include "../../include/listeners/RevealTile.hpp"
 
-extern Coordinator gCoordinator;
+extern eecsge::Coordinator gCoordinator;
 
 void RevealTileListener::init(std::shared_ptr<MapSystem> mapSystem)
 {
@@ -15,7 +15,7 @@ void RevealTileListener::init(std::shared_ptr<MapSystem> mapSystem)
     gCoordinator.AddListener(METHOD_LISTENER(Events::RevealTile::REVEAL, RevealTileListener::callMapSystem));
 }
 
-void RevealTileListener::callMapSystem(Event &event)
+void RevealTileListener::callMapSystem(eecsge::Event &event)
 {
     _mapSystem->revealTile(event);
 }

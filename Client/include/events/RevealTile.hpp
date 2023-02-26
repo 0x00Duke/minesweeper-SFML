@@ -14,12 +14,12 @@
 
 namespace Events::RevealTile
 {
-    const EventId REVEAL = "RevealTileEvent"_hash;
+    const eecsge::EventId REVEAL = std::hash<std::string>{}("RevealTileEvent");
 } // namespace Events::RevealTile
 
 namespace Events::RevealTile::Reveal
 {
-    const ParamId X = "revealPosX"_hash;
-    const ParamId Y = "revealPosY"_hash;
-    const ParamId VALUE = "revealValue"_hash;
+    const eecsge::ParamId X = std::hash<std::string>{}("revealPosX");
+    const eecsge::ParamId Y = std::hash<std::string>{}("revealPosY");
+    const eecsge::ParamId VALUE = std::hash<std::string>{}("revealValue");
 } // namespace Events::RevealTile::Reveal

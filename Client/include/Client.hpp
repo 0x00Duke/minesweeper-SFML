@@ -29,7 +29,7 @@ class Client
 {
 private:
     /* systems */
-    std::shared_ptr<DrawSystem> drawSystem;
+    std::shared_ptr<eecsge::DrawSystem> drawSystem;
     std::shared_ptr<newBackgroundSystem> backgroundSystem;
     std::shared_ptr<MinerSystem> minerSystem;
     std::shared_ptr<MapSystem> mapSystem;

@@ -17,7 +17,7 @@
 
 #include <EECSGE/Physics.hpp>
 
-class newBackgroundSystem : public System {
+class newBackgroundSystem : public eecsge::System {
     public:
         void update();
 };

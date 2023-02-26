@@ -7,7 +7,7 @@
 
 #include "../../include/systems/map.hpp"
 
-extern Coordinator gCoordinator;
+extern eecsge::Coordinator gCoordinator;
 
 void MapSystem::update()
 {
@@ -25,7 +25,7 @@ void MapSystem::update()
     }
 }
 
-void MapSystem::revealTile(Event &event)
+void MapSystem::revealTile(eecsge::Event &event)
 {
     x = event.GetParam<int>(Events::RevealTile::Reveal::X);
     y = event.GetParam<int>(Events::RevealTile::Reveal::Y);
