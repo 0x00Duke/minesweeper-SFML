@@ -13,7 +13,6 @@ Client::Client()
 {
     gCoordinator.Init();
     drawSystem = gCoordinator.RegisterSystem<DrawSystem>();
-    movementSystem = gCoordinator.RegisterSystem<MovementSystem>();
     backgroundSystem = gCoordinator.RegisterSystem<newBackgroundSystem>();
     minerSystem = gCoordinator.RegisterSystem<MinerSystem>();
     mapSystem = gCoordinator.RegisterSystem<MapSystem>();
