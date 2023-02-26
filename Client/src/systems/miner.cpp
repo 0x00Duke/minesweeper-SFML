@@ -8,7 +8,7 @@
 #include "../../include/systems/miner.hpp"
 #include "../../include/components/click.hpp"
 
-extern Coordinator gCoordinator;
+extern eecsge::Coordinator gCoordinator;
 
 void MinerSystem::update(sf::Event event)
 {
@@ -21,7 +21,7 @@ void MinerSystem::update(sf::Event event)
 
             if (x <= 0 || y <= 0 || x > 10 || y > 10)
                 return;
-            Event newEvent(Events::Inputs::CLICK);
+            eecsge::Event newEvent(Events::Inputs::CLICK);
             newEvent.SetParam(Events::Inputs::Click::X, x);
             newEvent.SetParam(Events::Inputs::Click::Y, y);
             newEvent.SetParam(Events::Inputs::Click::BUTTON, event.mouseButton.button);

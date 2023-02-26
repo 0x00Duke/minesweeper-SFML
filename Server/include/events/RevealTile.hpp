@@ -9,17 +9,16 @@
 
 #include <EECSGE/Core.hpp>
 #include <EECSGE/Graphics.hpp>
-
 #include <EECSGE/Physics.hpp>
 
 namespace Events::RevealTile
 {
-    const EventId REVEAL = "RevealTileEvent"_hash;
+    const eecsge::EventId REVEAL = std::hash<std::string>{}("RevealTileEvent");
 } // namespace Events::RevealTile
 
 namespace Events::RevealTile::Reveal
 {
-    const ParamId X = "revealPosX"_hash;
-    const ParamId Y = "revealPosY"_hash;
-    const ParamId BUTTON = "revealButton"_hash;
+    const eecsge::ParamId X = std::hash<std::string>{}("revealPosX");
+    const eecsge::ParamId Y = std::hash<std::string>{}("revealPosY");
+    const eecsge::ParamId BUTTON = std::hash<std::string>{}("revealButton");
 } // namespace Events::RevealTile::Reveal

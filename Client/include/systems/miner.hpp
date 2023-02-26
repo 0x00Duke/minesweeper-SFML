@@ -15,7 +15,7 @@
 #include "../events/Input.hpp"
 
 
-class MinerSystem : public System {
+class MinerSystem : public eecsge::System {
     public:
         void update(sf::Event event);
 };

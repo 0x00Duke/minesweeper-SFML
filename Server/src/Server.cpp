@@ -7,7 +7,7 @@
 
 #include "../include/Server.hpp"
 
-Coordinator gCoordinator;
+eecsge::Coordinator gCoordinator;
 
 Server::Server()
 {

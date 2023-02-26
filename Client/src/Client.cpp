@@ -7,12 +7,12 @@
 
 #include "../include/Client.hpp"
 
-Coordinator gCoordinator;
+eecsge::Coordinator gCoordinator;
 
 Client::Client()
 {
     gCoordinator.Init();
-    drawSystem = gCoordinator.RegisterSystem<DrawSystem>();
+    drawSystem = gCoordinator.RegisterSystem<eecsge::DrawSystem>();
     backgroundSystem = gCoordinator.RegisterSystem<newBackgroundSystem>();
     minerSystem = gCoordinator.RegisterSystem<MinerSystem>();
     mapSystem = gCoordinator.RegisterSystem<MapSystem>();

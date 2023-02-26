@@ -8,12 +8,12 @@
 #include "../../include/systems/background.hpp"
 #include "../../include/macros.hpp"
 
-extern Coordinator gCoordinator;
+extern eecsge::Coordinator gCoordinator;
 
 void newBackgroundSystem::update()
 {
     for (auto entity : mEntities) {
-        auto &rigidBody = gCoordinator.GetComponent<RigidBody>(entity);
+        auto &rigidBody = gCoordinator.GetComponent<eecsge::RigidBody>(entity);
         auto &drawable = gCoordinator.GetComponent<Drawable>(entity);
 
         if (rigidBody.position.x - SCREEN_WIDTH <= -BG_WIDTH && rigidBody.velocity.x < 0) {

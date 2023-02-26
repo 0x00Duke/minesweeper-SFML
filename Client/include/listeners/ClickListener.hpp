@@ -16,5 +16,5 @@
 class ClickListener {
 public:
     void init();
-    void clickHandler(Event &event);
+    void clickHandler(eecsge::Event &event);
 };

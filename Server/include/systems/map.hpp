@@ -15,10 +15,10 @@
 #include "../components/tile.hpp"
 #include "../events/RevealTile.hpp"
 
-class MapSystem : public System {
+class MapSystem : public eecsge::System {
     public:
         void update();
-        void revealTile(Event &event);
+        void revealTile(eecsge::Event &event);
     
     private:
         int x = -1;

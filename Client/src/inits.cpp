@@ -7,31 +7,31 @@
 
 #include "../include/inits.hpp"
 
-extern Coordinator gCoordinator;
+extern eecsge::Coordinator gCoordinator;
 
 void initSignatures()
 {
-    gCoordinator.RegisterComponent<RigidBody>();
+    gCoordinator.RegisterComponent<eecsge::RigidBody>();
     gCoordinator.RegisterComponent<Drawable>();
     gCoordinator.RegisterComponent<Tile>();
     gCoordinator.RegisterComponent<Click>();
 
     // set the signature of the systems
 
-    Signature Dsignature;
-    Dsignature.set(gCoordinator.GetComponentType<RigidBody>());
+    eecsge::Signature Dsignature;
+    Dsignature.set(gCoordinator.GetComponentType<eecsge::RigidBody>());
     Dsignature.set(gCoordinator.GetComponentType<Drawable>());
-    gCoordinator.SetSystemSignature<DrawSystem>(Dsignature);
+    gCoordinator.SetSystemSignature<eecsge::DrawSystem>(Dsignature);
 
-    Signature signatureBackground;
+    eecsge::Signature signatureBackground;
     signatureBackground.set(gCoordinator.GetComponentType<Drawable>());
     gCoordinator.SetSystemSignature<newBackgroundSystem>(signatureBackground);
 
-    Signature signatureMiner;
+    eecsge::Signature signatureMiner;
     signatureMiner.set(gCoordinator.GetComponentType<Click>());
     gCoordinator.SetSystemSignature<MinerSystem>(signatureMiner);
 
-    Signature signatureMap;
+    eecsge::Signature signatureMap;
     signatureMap.set(gCoordinator.GetComponentType<Tile>());
     signatureMap.set(gCoordinator.GetComponentType<Drawable>());
     gCoordinator.SetSystemSignature<MapSystem>(signatureMap);
@@ -39,7 +39,7 @@ void initSignatures()
 
 void initBackground()
 {
-    Entity background = gCoordinator.CreateEntity();
+    eecsge::Entity background = gCoordinator.CreateEntity();
     sf::Texture *texture = new sf::Texture();
 
     if (!texture->loadFromFile(BG_PATH))
@@ -47,7 +47,7 @@ void initBackground()
 
     sf::Sprite sprite(*texture);
 
-    gCoordinator.AddComponent(background, RigidBody{
+    gCoordinator.AddComponent(background, eecsge::RigidBody{
                                               sf::Vector2i(0, 0),    // position
                                               sf::Vector2f(-1, 0), // velocity
                                               sf::Vector2f(0, 0),    // acceleration
@@ -73,9 +73,9 @@ void initTiles()
                 std::cout << "Error loading tiles" << std::endl;
 
             sf::Sprite s(*t);
-            Entity tile = gCoordinator.CreateEntity();
+            eecsge::Entity tile = gCoordinator.CreateEntity();
 
-            gCoordinator.AddComponent(tile, RigidBody{
+            gCoordinator.AddComponent(tile, eecsge::RigidBody{
                                                 sf::Vector2i(i * SIZE_TILE, j * SIZE_TILE), // position
                                                 sf::Vector2f(0, 0),                         // velocity
                                                 sf::Vector2f(0, 0),                         // acceleration
@@ -98,6 +98,6 @@ void initTiles()
 
 void initMiner()
 {
-    Entity miner = gCoordinator.CreateEntity();
+    eecsge::Entity miner = gCoordinator.CreateEntity();
     gCoordinator.AddComponent(miner, Click{});
 }
