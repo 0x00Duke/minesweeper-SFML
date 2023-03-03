@@ -23,6 +23,7 @@ endif(APPLE)
 set(SOURCE_CLI
   Client/src/main.cpp
   Client/src/Client.cpp
+  Client/src/Lobby.cpp
   Client/src/inits.cpp
   Client/src/systems/background.cpp
   Client/src/systems/miner.cpp
@@ -60,22 +61,34 @@ include_directories(. include)
 
 include(FetchContent)
 
-
+message("Fetching eegecsge...")
 FetchContent_Declare(eecsge
     GIT_REPOSITORY https://github.com/Shorssaud/EECSGE
     GIT_TAG main
 )
 FetchContent_MakeAvailable(eecsge)
+message("EECSGE fetched")
 
+message("Fetching SFML...")
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG 2.5.x)
 FetchContent_MakeAvailable(SFML)
+message("SFML fetched")
 
-FetchContent_Declare(GTEST
-    GIT_REPOSITORY https://github.com/google/googletest
-    GIT_TAG v1.13.x)
-FetchContent_MakeAvailable(GTEST)
+
+# FetchContent_Declare(GTEST
+    # GIT_REPOSITORY https://github.com/google/googletest
+    # GIT_TAG v1.13.x)
+# FetchContent_MakeAvailable(GTEST)
+
+# set(tcud_BUILD_SERVER FALSE)
+
+# FetchContent_Declare(boost-net
+#     GIT_REPOSITORY git@github.com:eljoserass/BoostAsio-tcpudp-server.git
+#     GIT_TAG FIX-includes
+# )
+# FetchContent_MakeAvailable(boost-net)
 
 #------------------------------------------------------------
 add_executable(Client ${SOURCE_CLI})
