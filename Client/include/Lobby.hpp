@@ -18,6 +18,7 @@ class Lobby
 private:
     sf::RenderWindow *_window;
     bool connectToServer(sf::String ip);
+    std::tuple<std::string, std::string> splitIp(sf::String ip);
 
 public:
     Lobby(sf::RenderWindow *window);

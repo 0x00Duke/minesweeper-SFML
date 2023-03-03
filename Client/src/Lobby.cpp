@@ -16,9 +16,34 @@ Lobby::~Lobby()
 {
 }
 
+std::tuple<std::string, std::string> Lobby::splitIp(sf::String ip)
+{
+    std::string delimiter = ":";
+    std::string ipString = ip;
+
+    size_t pos = ip.find(delimiter);
+    if (pos == std::string::npos) {
+        std::cout << "Error: Invalid ip" << std::endl;
+        return std::make_tuple("", "");
+    }
+
+    std::string portString = ipString.substr(pos + 1, ipString.length());
+    ipString = ipString.substr(0, pos);
+
+    return std::make_tuple(ipString, portString);
+}
+
 bool Lobby::connectToServer(sf::String ip)
 {
     std::cout << "Connecting" << std::endl;
+
+    std::tuple<std::string, std::string> ipTuple = splitIp(ip);
+    if (std::get<0>(ipTuple) == "" || std::get<1>(ipTuple) == "")
+        return false;
+    
+    std::cout << "Ip: " << std::get<0>(ipTuple) << std::endl;
+    std::cout << "Port: " << std::get<1>(ipTuple) << std::endl;
+
     return true;
 }
 
@@ -57,6 +82,12 @@ int Lobby::connectionLobby()
                 } else if (event.text.unicode == 10) {
                     if (ip.getSize() > 0 && connectToServer(ip)) {
                         std::cout << "Connected to server" << std::endl;
+
+                        inputText.setString("Connected to server");
+                        inputText.setPosition(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2 - 50);
+                        _window->clear(sf::Color::White);
+                        _window->draw(inputText);
+                        _window->display();
                         return 0;
                     }
                     std::cout << "Error: Can't connect to server" << std::endl;
