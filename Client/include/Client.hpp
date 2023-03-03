@@ -18,6 +18,8 @@
 #include <EECSGE/Graphics.hpp>
 #include <EECSGE/Physics.hpp>
 
+#include "Lobby.hpp"
+
 #include "inits.hpp"
 #include "systems/map.hpp"
 #include "events/Input.hpp"
