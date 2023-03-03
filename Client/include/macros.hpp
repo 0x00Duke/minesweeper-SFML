@@ -12,7 +12,10 @@
 
 #define BG_WIDTH 5149*2
 #define BG_HEIGHT 3433*2
-#define BG_PATH "images/bg.jpg"
+#define BG_PATH "assets/images/bg.jpg"
 
 #define SIZE_TILE 32*2
-#define TILE_PATH "images/tiles.jpg"
+#define TILE_PATH "assets/images/tiles.jpg"
+
+#define FONT_PATH "assets/fonts/font.ttf"
+#define IP_TEXT "IP:PORT -> "
