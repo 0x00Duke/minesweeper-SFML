@@ -19,14 +19,6 @@ void MapSystem::update()
                 tile.sValue = 11;
             else
                 tile.sValue = tile.value;
-            
-            // print the map
-            for (int i = 1; i <= 10; i++) {
-                for (int j = 1; j <= 10; j++){
-                    std::cout << gCoordinator.GetComponent<Tile>(i * 10 + j).sValue << " ";
-                }
-                std::cout << std::endl;
-            }
 
             x = y = -1;
             button = sf::Mouse::Button::Middle;

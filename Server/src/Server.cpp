@@ -77,10 +77,37 @@ void Server::ReceivePacket(sf::TcpSocket *client, size_t iterator)
         packet >> received_message;
         packet.clear();
 
-        packet << received_message << client->getRemoteAddress().toString() << client->getRemotePort();
+        std::vector<std::string> split_message;
+        std::string delimiter = ";";
 
-        BroadcastPacket(packet, client->getRemoteAddress(), client->getRemotePort());
-        logl(client->getRemoteAddress().toString() << ":" << client->getRemotePort() << " '" << received_message << "'");
+        size_t pos = 0;
+        std::string token;
+        while ((pos = received_message.find(delimiter)) != std::string::npos) {
+            token = received_message.substr(0, pos);
+            split_message.push_back(token);
+            received_message.erase(0, pos + delimiter.length());
+        }
+        split_message.push_back(received_message);
+
+        std::cout << split_message[0] << split_message[1] << split_message[2] << std::endl;
+
+        eecsge::Event event(Events::RevealTile::REVEAL);
+        event.SetParam(Events::RevealTile::Reveal::X, std::stoi(split_message[1]));
+        event.SetParam(Events::RevealTile::Reveal::Y, std::stoi(split_message[2]));
+
+        if (split_message[0] == "reveal")
+            event.SetParam(Events::RevealTile::Reveal::BUTTON, sf::Mouse::Button::Left);
+        else if (split_message[0] == "flag")
+            event.SetParam(Events::RevealTile::Reveal::BUTTON, sf::Mouse::Button::Right);
+        else
+            return;
+        gCoordinator.SendEvent(event);
+
+
+        // packet << received_message << client->getRemoteAddress().toString() << client->getRemotePort();
+
+        // BroadcastPacket(packet, client->getRemoteAddress(), client->getRemotePort());
+        // logl(client->getRemoteAddress().toString() << ":" << client->getRemotePort() << " '" << received_message << "'");
     }
 }
 
@@ -97,7 +124,7 @@ void Server::ManagePackets()
 void Server::run()
 {
     std::thread connetion_thread(&Server::ConnectClients, this, &client_array);
-    ManagePackets();
+    // ManagePackets();
     srand(time(0));
 
     initTiles();
