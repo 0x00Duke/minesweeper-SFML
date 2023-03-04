@@ -91,11 +91,11 @@ message("SFML fetched")
 # FetchContent_MakeAvailable(boost-net)
 
 #------------------------------------------------------------
-add_executable(Client ${SOURCE_CLI})
+# add_executable(Client ${SOURCE_CLI})
 add_executable(Server ${SOURCE_SERVER})
 
-target_link_libraries(Client sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
-target_link_libraries(Server sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
+# target_link_libraries(Client sfml-audio sfml-graphics sfml-system sfml-window eecsge-graphics eecsge-core)
+target_link_libraries(Server sfml-audio sfml-graphics sfml-system sfml-window sfml-network eecsge-graphics eecsge-core)
 
 
 # Testing
