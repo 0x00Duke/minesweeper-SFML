@@ -18,6 +18,12 @@
 #include <EECSGE/Graphics.hpp>
 #include <EECSGE/Physics.hpp>
 
+#include <thread>
+#include <chrono>
+
+#define logl(x) std::cout << x << std::endl
+#define log(x) std::cout << x
+
 #include "Lobby.hpp"
 
 #include "inits.hpp"
@@ -35,9 +41,18 @@ private:
     std::shared_ptr<newBackgroundSystem> backgroundSystem;
     std::shared_ptr<MinerSystem> minerSystem;
     std::shared_ptr<MapSystem> mapSystem;
+
+    sf::TcpSocket socket;
+    sf::Packet last_packet;
+
+    bool isConnected = false;
 public:
     Client(/* args */);
     ~Client();
 
+    // void Connect(const char *, unsigned short);
+    void ReceivePackets(sf::TcpSocket *);
+    void SendPacket(sf::Packet &);
+    // void Run();
     void run();
 };

@@ -18,10 +18,33 @@ Client::Client()
     mapSystem = gCoordinator.RegisterSystem<MapSystem>();
 
     initSignatures();
+
+    logl("Client Started");
 }
 
 Client::~Client()
 {
+}
+
+void Client::ReceivePackets(sf::TcpSocket *socket)
+{
+    while (true) {
+        if (socket->receive(last_packet) == sf::Socket::Done) {
+            std::string received_string;
+            std::string sender_address;
+            unsigned short sender_port;
+            last_packet >> received_string >> sender_address >> sender_port;
+            logl("From (" << sender_address << ":" << sender_port << "): " << received_string);
+        }
+        std::this_thread::sleep_for((std::chrono::milliseconds)250);
+    }
+}
+
+void Client::SendPacket(sf::Packet &packet)
+{
+    if (packet.getDataSize() > 0 && socket.send(packet) != sf::Socket::Done) {
+        logl("Could not send packet");
+    }
 }
 
 void Client::run()
@@ -29,7 +52,7 @@ void Client::run()
     // create the window
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Minesweeper");
 
-    Lobby lobby(&window);
+    Lobby lobby(&window, &socket);
     lobby.connectionLobby();
 
     // create the background
@@ -48,6 +71,8 @@ void Client::run()
     // int x = 1;
     // int y = 1;
     // int value = 0;
+
+    std::thread reception_thred(&Client::ReceivePackets, this, &socket);
 
     sf::Event event; 
     while (window.isOpen()) {
@@ -76,5 +101,16 @@ void Client::run()
         mapSystem->update();
         drawSystem->DrawEntities(&window);
         window.display();
+
+        std::string user_input;
+        std::getline(std::cin, user_input);
+        
+        if (user_input.length() < 1)
+            continue;
+        
+        sf::Packet reply_packet;
+        reply_packet << user_input;
+        
+        SendPacket(reply_packet);
     }
 }
