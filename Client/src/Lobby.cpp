@@ -7,9 +7,10 @@
 
 #include "../include/Lobby.hpp"
 
-Lobby::Lobby(sf::RenderWindow *window)
+Lobby::Lobby(sf::RenderWindow *window, sf::TcpSocket *socket)
 {
     _window = window;
+    _socket = socket;
 }
 
 Lobby::~Lobby()
@@ -44,6 +45,14 @@ bool Lobby::connectToServer(sf::String ip)
     std::cout << "Ip: " << std::get<0>(ipTuple) << std::endl;
     std::cout << "Port: " << std::get<1>(ipTuple) << std::endl;
 
+    unsigned short port = (unsigned short) strtoul(std::get<1>(ipTuple).c_str(), NULL, 0);
+
+    if (_socket->connect(std::get<0>(ipTuple), port) != sf::Socket::Done) {
+        logl("Could not connect to the server\n");
+        return false;
+    }
+
+    logl("Connected to the server\n");
     return true;
 }
 
@@ -81,7 +90,6 @@ int Lobby::connectionLobby()
                     }
                 } else if (event.text.unicode == 10) {
                     if (ip.getSize() > 0 && connectToServer(ip)) {
-                        std::cout << "Connected to server" << std::endl;
 
                         inputText.setString("Connected to server");
                         inputText.setPosition(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2 - 50);
