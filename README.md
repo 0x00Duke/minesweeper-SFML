@@ -1,5 +1,5 @@
 # minesweeper-SFML
-Minesweeper using SFML and ECS
+Network Minesweeper using SFML and ECS
 
 # How to build
 
@@ -9,10 +9,24 @@ From the root directory, run the following commands:
 
 ```cd build```
 
-```cp -a ../images .```
+```cp -a ../assets .```
 
 ```make```
 
 # How to run
 
-```./Demo```
+In one terminal
+
+```./Server <port>```
+
+In another terminal
+
+```./Client```
+
+Then, in the client window, enter the server's IP address and port number. With the following format:
+
+```<IP address>:<port>```
+
+
+
+# You can now play the game!
