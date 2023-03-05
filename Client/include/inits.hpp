@@ -25,6 +25,6 @@
 #include <EECSGE/Physics.hpp>
 
 void initSignatures();
-void initBackground();
-void initTiles();
+int initBackground();
+int initTiles();
 void initMiner();
