@@ -19,6 +19,12 @@ void MapSystem::update()
                 tile.sValue = 11;
             else
                 tile.sValue = tile.value;
+            
+            eecsge::Event event(Events::SendTile::SENDTILE);
+            event.SetParam(Events::SendTile::SendTile::X, std::to_string(tile.x));
+            event.SetParam(Events::SendTile::SendTile::Y, std::to_string(tile.y));
+            event.SetParam(Events::SendTile::SendTile::VALUE, std::to_string(tile.sValue));
+            gCoordinator.SendEvent(event);
 
             x = y = -1;
             button = sf::Mouse::Button::Middle;

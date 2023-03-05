@@ -11,7 +11,6 @@ extern eecsge::Coordinator gCoordinator;
 
 void ClientsSystem::DisconnectClient(Client client, eecsge::Entity entity)
 {
-    // logl("Client " << client.socket->getRemoteAddress() << ":" << client.socket->getRemotePort() << " disconnected, removing");
     client.socket->disconnect();
     delete (client.socket);
 }
@@ -55,12 +54,19 @@ void ClientsSystem::ReceivePacket(Client client, eecsge::Entity entity)
         else
             return;
         gCoordinator.SendEvent(event);
+    }
+}
 
+void ClientsSystem::BroadcastPacket(sf::Packet packet)
+{
+    for (auto entity : mEntities) {
+        auto &client = gCoordinator.GetComponent<Client>(entity);
 
-        // packet << received_message << client->getRemoteAddress().toString() << client->getRemotePort();
-
-        // BroadcastPacket(packet, client->getRemoteAddress(), client->getRemotePort());
-        // logl(client->getRemoteAddress().toString() << ":" << client->getRemotePort() << " '" << received_message << "'");
+        if (client.socket->getRemoteAddress() == sf::IpAddress::None)
+            continue;
+        if (client.socket->send(packet) != sf::Socket::Done) {
+            logl("Could not send packet on broadcast");
+        }
     }
 }
 
@@ -73,14 +79,5 @@ void ClientsSystem::update()
         if (client.socket->getRemoteAddress() == sf::IpAddress::None)
             continue;
         ReceivePacket(client, entity);
-
-        // sf::Packet packet;
-        // sf::Socket::Status status = client.socket->receive(packet);
-// 
-        // if (status == sf::Socket::Done) {
-            // packet >> data;
-            // std::string data;
-        // }
-            // std::cout << data << std::endl;
     }
 }

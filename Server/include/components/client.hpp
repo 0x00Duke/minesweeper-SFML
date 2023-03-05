@@ -12,5 +12,4 @@
 struct Client
 {
     sf::TcpSocket *socket;
-    size_t iterator;
 };

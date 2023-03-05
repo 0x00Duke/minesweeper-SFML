@@ -17,7 +17,6 @@ namespace Events::SendTile
 
 namespace Events::SendTile::SendTile
 {
-    const eecsge::ParamId clients = std::hash<std::string>{}("clients");
     const eecsge::ParamId X = std::hash<std::string>{}("revealPosX");
     const eecsge::ParamId Y = std::hash<std::string>{}("revealPosY");
     const eecsge::ParamId VALUE = std::hash<std::string>{}("revealValue");

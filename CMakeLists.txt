@@ -39,6 +39,7 @@ set(SOURCE_SERVER
   Server/src/systems/map.cpp
   Server/src/systems/clients.cpp
   Server/src/listeners/RevealTile.cpp
+  Server/src/listeners/SendTile.cpp
   Server/src/tools/initGrid.cpp
   Server/src/tools/inRange.cpp
 )
