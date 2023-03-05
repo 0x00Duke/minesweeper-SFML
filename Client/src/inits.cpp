@@ -15,6 +15,7 @@ void initSignatures()
     gCoordinator.RegisterComponent<Drawable>();
     gCoordinator.RegisterComponent<Tile>();
     gCoordinator.RegisterComponent<Click>();
+    gCoordinator.RegisterComponent<Text>();
 
     // set the signature of the systems
 
@@ -35,6 +36,10 @@ void initSignatures()
     signatureMap.set(gCoordinator.GetComponentType<Tile>());
     signatureMap.set(gCoordinator.GetComponentType<Drawable>());
     gCoordinator.SetSystemSignature<MapSystem>(signatureMap);
+
+    eecsge::Signature signatureText;
+    signatureText.set(gCoordinator.GetComponentType<Text>());
+    gCoordinator.SetSystemSignature<TextSystem>(signatureText);
 }
 
 int initBackground()
