@@ -14,11 +14,6 @@ void ClientsSystem::DisconnectClient(Client client, eecsge::Entity entity)
     // logl("Client " << client.socket->getRemoteAddress() << ":" << client.socket->getRemotePort() << " disconnected, removing");
     client.socket->disconnect();
     delete (client.socket);
-
-    // delete the entity, cast the client to entity
-    gCoordinator.DestroyEntity(entity);
-
-    // client_array.erase(client_array.begin() + position);
 }
 
 void ClientsSystem::ReceivePacket(Client client, eecsge::Entity entity)
@@ -74,6 +69,9 @@ void ClientsSystem::update()
     for (auto entity : mEntities) {
         auto &client = gCoordinator.GetComponent<Client>(entity);
 
+        // if the client is not connected, skip it
+        if (client.socket->getRemoteAddress() == sf::IpAddress::None)
+            continue;
         ReceivePacket(client, entity);
 
         // sf::Packet packet;
