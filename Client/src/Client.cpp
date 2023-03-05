@@ -83,8 +83,12 @@ void Client::run()
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Minesweeper");
 
     Lobby lobby(&window, &socket);
-    if (lobby.connectionLobby())
+    int lobbyStatus = lobby.connectionLobby();
+    if (lobbyStatus) {
+        if (lobbyStatus == -1)
+            window.close();
         return;
+    }
 
     if (initBackground() || initTiles())
         return;
