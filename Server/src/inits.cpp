@@ -12,10 +12,15 @@ extern eecsge::Coordinator gCoordinator;
 void initSignatures()
 {
     gCoordinator.RegisterComponent<Tile>();
+    gCoordinator.RegisterComponent<Client>();
 
     eecsge::Signature signatureMap;
     signatureMap.set(gCoordinator.GetComponentType<Tile>());
     gCoordinator.SetSystemSignature<MapSystem>(signatureMap);
+
+    eecsge::Signature signatureClients;
+    signatureClients.set(gCoordinator.GetComponentType<Client>());
+    gCoordinator.SetSystemSignature<ClientsSystem>(signatureClients);
 }
 
 void initTiles()

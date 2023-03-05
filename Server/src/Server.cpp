@@ -19,6 +19,7 @@ Server::Server(unsigned short port) : listen_port(port)
 
     gCoordinator.Init();
     mapSystem = gCoordinator.RegisterSystem<MapSystem>();
+    clientsSystem = gCoordinator.RegisterSystem<ClientsSystem>();
 
     initSignatures();
 }
@@ -27,14 +28,20 @@ Server::~Server()
 {
 }
 
-void Server::ConnectClients(std::vector<sf::TcpSocket *> *client_array)
+void Server::ConnectClients()
 {
     while (true) {
         sf::TcpSocket *new_client = new sf::TcpSocket();
         if (listener.accept(*new_client) == sf::Socket::Done) {
             new_client->setBlocking(false);
-            client_array->push_back(new_client);
-            logl("Added client " << new_client->getRemoteAddress() << ":" << new_client->getRemotePort() << " on slot " << client_array->size());
+
+            // create a new entity for the client
+            eecsge::Entity client = gCoordinator.CreateEntity();
+            gCoordinator.AddComponent(client, Client{new_client, number_of_clients});
+            number_of_clients++;
+
+            // client_array->push_back(new_client);
+            logl("Added client " << new_client->getRemoteAddress() << ":" << new_client->getRemotePort());
         }
         else {
             logl("Server listener error, restart the server");
@@ -123,8 +130,7 @@ void Server::ManagePackets()
 
 void Server::run()
 {
-    std::thread connetion_thread(&Server::ConnectClients, this, &client_array);
-    // ManagePackets();
+    std::thread connetion_thread(&Server::ConnectClients, this);
     srand(time(0));
 
     initTiles();
@@ -134,10 +140,11 @@ void Server::run()
 
     while (true) {
         mapSystem->update();
+        clientsSystem->update();
 
-        for (size_t iterator = 0; iterator < client_array.size(); iterator++) {
-            ReceivePacket(client_array[iterator], iterator);
-        }
+        // for (size_t iterator = 0; iterator < client_array.size(); iterator++) {
+        //     ReceivePacket(client_array[iterator], iterator);
+        // }
 
         std::this_thread::sleep_for((std::chrono::milliseconds)250);
     }

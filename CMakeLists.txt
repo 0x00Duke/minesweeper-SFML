@@ -37,6 +37,7 @@ set(SOURCE_SERVER
   Server/src/Server.cpp
   Server/src/inits.cpp
   Server/src/systems/map.cpp
+  Server/src/systems/clients.cpp
   Server/src/listeners/RevealTile.cpp
   Server/src/tools/initGrid.cpp
   Server/src/tools/inRange.cpp
