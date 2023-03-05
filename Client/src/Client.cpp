@@ -53,12 +53,11 @@ void Client::run()
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Minesweeper");
 
     Lobby lobby(&window, &socket);
-    lobby.connectionLobby();
+    if (lobby.connectionLobby())
+        return;
 
-    // create the background
-    initBackground();
-    // create the tiles
-    initTiles();
+    if (initBackground() || initTiles())
+        return;
     // create the miner
     initMiner();
 

@@ -37,13 +37,15 @@ void initSignatures()
     gCoordinator.SetSystemSignature<MapSystem>(signatureMap);
 }
 
-void initBackground()
+int initBackground()
 {
     eecsge::Entity background = gCoordinator.CreateEntity();
     sf::Texture *texture = new sf::Texture();
 
-    if (!texture->loadFromFile(BG_PATH))
+    if (!texture->loadFromFile(BG_PATH)) {
         std::cout << "Error loading background" << std::endl;
+        return -1;
+    }
 
     sf::Sprite sprite(*texture);
 
@@ -60,17 +62,20 @@ void initBackground()
                                               texture,
                                               sprite,
                                               sf::IntRect(0, 0, BG_WIDTH, BG_HEIGHT)});
+    return 0;
 }
 
-void initTiles()
+int initTiles()
 {
     for (int i = 1; i <= 10; i++)
     {
         for (int j = 1; j <= 10; j++)
         {
             sf::Texture *t = new sf::Texture();
-            if (!t->loadFromFile(TILE_PATH))
+            if (!t->loadFromFile(TILE_PATH)) {
                 std::cout << "Error loading tiles" << std::endl;
+                return -1;
+            }
 
             sf::Sprite s(*t);
             eecsge::Entity tile = gCoordinator.CreateEntity();
@@ -94,6 +99,7 @@ void initTiles()
                                                 j});
         }
     }
+    return 0;
 }
 
 void initMiner()

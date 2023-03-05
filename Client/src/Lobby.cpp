@@ -62,6 +62,7 @@ int Lobby::connectionLobby()
     if (!font.loadFromFile(FONT_PATH))
     {
         std::cerr << "Error: Font not found" << std::endl;
+        _window->close();
         return 84;
     }
 
