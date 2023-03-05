@@ -8,11 +8,8 @@
 #pragma once
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
 
 #include <thread>
 #include <vector>
@@ -20,8 +17,6 @@
 #include <string.h>
 
 #include <EECSGE/Core.hpp>
-#include <EECSGE/Graphics.hpp>
-#include <EECSGE/Physics.hpp>
 
 #include "inits.hpp"
 #include "listeners/RevealTile.hpp"
@@ -37,14 +32,17 @@ private:
     std::vector<sf::TcpSocket *> client_array;
     unsigned short listen_port;
 
+    size_t number_of_clients = 0;
+
     std::shared_ptr<MapSystem> mapSystem;
+    std::shared_ptr<ClientsSystem> clientsSystem;
 
 public:
     Server(unsigned short);
     ~Server();
     void run();
     
-    void ConnectClients(std::vector<sf::TcpSocket *> *);
+    void ConnectClients();
     void DisconnectClient(sf::TcpSocket *, size_t);
     void ReceivePacket(sf::TcpSocket *, size_t);
     void BroadcastPacket(sf::Packet &, sf::IpAddress, unsigned short);

@@ -8,7 +8,10 @@
 #pragma once
 
 #include "components/tile.hpp"
+#include "components/client.hpp"
+
 #include "systems/map.hpp"
+#include "systems/clients.hpp"
 
 #include <EECSGE/Core.hpp>
 #include <EECSGE/Graphics.hpp>
