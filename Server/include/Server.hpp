@@ -21,6 +21,7 @@
 #include "inits.hpp"
 #include "listeners/RevealTile.hpp"
 #include "listeners/SendTile.hpp"
+#include "listeners/EndGame.hpp"
 
 #define MAX_RAW_DATA 256
 #define logl(x) std::cout << x << std::endl
@@ -34,6 +35,9 @@ private:
 
     std::shared_ptr<MapSystem> mapSystem;
     std::shared_ptr<ClientsSystem> clientsSystem;
+    std::shared_ptr<WinLooseSystem> winLooseSystem;
+
+    bool isRunning = true;
 
 public:
     Server(unsigned short);

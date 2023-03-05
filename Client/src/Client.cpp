@@ -33,16 +33,23 @@ void Client::emitRevealTileEvent(std::string tile)
 void Client::proccessPacket(std::string message)
 {
     std::string action = message.substr(0, message.find(";"));
-    std::string x = message.substr(message.find(";") + 1, message.length());
-    std::string y = x.substr(x.find(";") + 1, x.length());
-    std::string value = y.substr(y.find(";") + 1, y.length());
 
     if (action == "reveal") {
+
+        std::string x = message.substr(message.find(";") + 1, message.length());
+        std::string y = x.substr(x.find(";") + 1, x.length());
+        std::string value = y.substr(y.find(";") + 1, y.length());
+        
         eecsge::Event newEvent(Events::RevealTile::REVEAL);
         newEvent.SetParam(Events::RevealTile::Reveal::X, std::stoi(x));
         newEvent.SetParam(Events::RevealTile::Reveal::Y, std::stoi(y));
         newEvent.SetParam(Events::RevealTile::Reveal::VALUE, std::stoi(value));
         gCoordinator.SendEvent(newEvent);
+    }
+
+    if (action == "endGame") {
+        std::string status = message.substr(message.find(";") + 1, message.length());
+        std::cout << "endGame: " << status << std::endl;
     }
 }
 

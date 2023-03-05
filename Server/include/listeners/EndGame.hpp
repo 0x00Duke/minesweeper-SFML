@@ -2,23 +2,21 @@
 ** EPITECH PROJECT, 2022
 ** minesweeper-SFML
 ** File description:
-** SendTile.hpp
+** EndGame.hpp
 */
 
 #pragma once
-
-#include <SFML/Network.hpp>
 
 #include <EECSGE/Core.hpp>
 
 #include "../systems/clients.hpp"
 #include "../components/tile.hpp"
-#include "../events/SendTile.hpp"
+#include "../events/EndGame.hpp"
 
-class SendTileListener {
+class EndGameListener {
     public:
         void init(std::shared_ptr<ClientsSystem> clientsSystem);
     private:
-        void SendTile(eecsge::Event &event);
+        void SendStatus(eecsge::Event &event);
         std::shared_ptr<ClientsSystem> _clientsSystem;
 };

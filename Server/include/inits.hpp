@@ -12,10 +12,10 @@
 
 #include "systems/map.hpp"
 #include "systems/clients.hpp"
+#include "systems/winLoose.hpp"
 
 #include <EECSGE/Core.hpp>
 #include <EECSGE/Graphics.hpp>
-
 #include <EECSGE/Physics.hpp>
 
 void initSignatures();

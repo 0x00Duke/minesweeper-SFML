@@ -20,6 +20,7 @@ Server::Server(unsigned short port) : listen_port(port)
     gCoordinator.Init();
     mapSystem = gCoordinator.RegisterSystem<MapSystem>();
     clientsSystem = gCoordinator.RegisterSystem<ClientsSystem>();
+    winLooseSystem = gCoordinator.RegisterSystem<WinLooseSystem>();
 
     initSignatures();
 }
@@ -30,7 +31,7 @@ Server::~Server()
 
 void Server::ConnectClients()
 {
-    while (true) {
+    while (isRunning) {
         sf::TcpSocket *new_client = new sf::TcpSocket();
         if (listener.accept(*new_client) == sf::Socket::Done) {
             new_client->setBlocking(false);
@@ -41,7 +42,7 @@ void Server::ConnectClients()
 
             logl("Added client " << new_client->getRemoteAddress() << ":" << new_client->getRemotePort());
         }
-        else {
+        else if (isRunning){
             logl("Server listener error, restart the server");
             delete (new_client);
             break;
@@ -62,11 +63,18 @@ void Server::run()
     SendTileListener sendTileListener;
     sendTileListener.init(clientsSystem);
 
+    EndGameListener endGameListener;
+    endGameListener.init(clientsSystem);
+
     while (true) {
         mapSystem->update();
         clientsSystem->update();
+        if (winLooseSystem->check()) {
+            isRunning = false;
+            break;
+        }
 
         std::this_thread::sleep_for((std::chrono::milliseconds)250);
     }
-    connetion_thread.join();
+    connetion_thread.detach();
 }

@@ -21,6 +21,10 @@ void initSignatures()
     eecsge::Signature signatureClients;
     signatureClients.set(gCoordinator.GetComponentType<Client>());
     gCoordinator.SetSystemSignature<ClientsSystem>(signatureClients);
+
+    eecsge::Signature signatureWinLoose;
+    signatureWinLoose.set(gCoordinator.GetComponentType<Tile>());
+    gCoordinator.SetSystemSignature<WinLooseSystem>(signatureWinLoose);
 }
 
 void initTiles()
