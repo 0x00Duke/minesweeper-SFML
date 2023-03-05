@@ -88,7 +88,7 @@ int Lobby::connectionLobby()
                         ip.erase(ip.getSize() - 1, ip.getSize());
                         inputText.setString(IP_TEXT + ip);
                     }
-                } else if (event.text.unicode == 10) {
+                } else if (event.text.unicode == 10 || event.text.unicode == 13) {
                     if (ip.getSize() > 0 && connectToServer(ip)) {
 
                         inputText.setString("Connected to server");
