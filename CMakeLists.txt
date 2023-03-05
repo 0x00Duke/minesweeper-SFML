@@ -28,8 +28,10 @@ set(SOURCE_CLI
   Client/src/systems/background.cpp
   Client/src/systems/miner.cpp
   Client/src/systems/map.cpp
+  Client/src/systems/text.cpp
   Client/src/listeners/ClickListener.cpp
   Client/src/listeners/RevealTile.cpp
+  Client/src/listeners/EndGame.cpp
 )
 
 set(SOURCE_SERVER

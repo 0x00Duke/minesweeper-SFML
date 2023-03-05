@@ -41,9 +41,6 @@ bool Lobby::connectToServer(sf::String ip)
     std::tuple<std::string, std::string> ipTuple = splitIp(ip);
     if (std::get<0>(ipTuple) == "" || std::get<1>(ipTuple) == "")
         return false;
-    
-    std::cout << "Ip: " << std::get<0>(ipTuple) << std::endl;
-    std::cout << "Port: " << std::get<1>(ipTuple) << std::endl;
 
     unsigned short port = (unsigned short) strtoul(std::get<1>(ipTuple).c_str(), NULL, 0);
 

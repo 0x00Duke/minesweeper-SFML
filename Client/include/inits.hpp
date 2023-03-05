@@ -9,9 +9,11 @@
 
 #include "components/tile.hpp"
 #include "components/click.hpp"
+#include "components/text.hpp"
 #include "systems/background.hpp"
 #include "systems/miner.hpp"
 #include "systems/map.hpp"
+#include "systems/text.hpp"
 
 #include "macros.hpp"
 

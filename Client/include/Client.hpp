@@ -28,9 +28,11 @@
 
 #include "inits.hpp"
 #include "systems/map.hpp"
+#include "systems/text.hpp"
 #include "events/Input.hpp"
 #include "listeners/ClickListener.hpp"
 #include "listeners/RevealTile.hpp"
+#include "listeners/EndGame.hpp"
 #include "macros.hpp"
 
 class Client
@@ -41,6 +43,7 @@ private:
     std::shared_ptr<newBackgroundSystem> backgroundSystem;
     std::shared_ptr<MinerSystem> minerSystem;
     std::shared_ptr<MapSystem> mapSystem;
+    std::shared_ptr<TextSystem> textSystem;
 
     sf::TcpSocket socket;
     sf::Packet last_packet;
