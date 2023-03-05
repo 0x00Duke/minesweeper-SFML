@@ -16,6 +16,7 @@ Client::Client()
     backgroundSystem = gCoordinator.RegisterSystem<newBackgroundSystem>();
     minerSystem = gCoordinator.RegisterSystem<MinerSystem>();
     mapSystem = gCoordinator.RegisterSystem<MapSystem>();
+    textSystem = gCoordinator.RegisterSystem<TextSystem>();
 
     initSignatures();
 
@@ -49,7 +50,9 @@ void Client::proccessPacket(std::string message)
 
     if (action == "endGame") {
         std::string status = message.substr(message.find(";") + 1, message.length());
-        std::cout << "endGame: " << status << std::endl;
+        eecsge::Event newEvent(Events::EndGame::ENDGAME);
+        newEvent.SetParam(Events::EndGame::EndGame::status, status);
+        gCoordinator.SendEvent(newEvent);
     }
 }
 
@@ -62,7 +65,6 @@ void Client::ReceivePackets(sf::TcpSocket *socket)
             unsigned short sender_port;
             last_packet >> received_string >> sender_address >> sender_port;
             proccessPacket(received_string);
-            // logl("From (" << sender_address << ":" << sender_port << "): " << received_string);
         }
         std::this_thread::sleep_for((std::chrono::milliseconds)250);
     }
@@ -95,9 +97,8 @@ void Client::run()
     RevealTileListener revealTileListener;
     revealTileListener.init(mapSystem);
 
-    // int x = 1;
-    // int y = 1;
-    // int value = 0;
+    EndGameListener endGameListener;
+    endGameListener.init(&window);
 
     std::thread reception_thred(&Client::ReceivePackets, this, &socket);
 
@@ -110,27 +111,14 @@ void Client::run()
                 window.close();
                 return;
             }
-            // if (event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                // Event newEvent(Events::RevealTile::REVEAL);
-                // newEvent.SetParam(Events::RevealTile::Reveal::X, x);
-                // newEvent.SetParam(Events::RevealTile::Reveal::Y, y);
-                // newEvent.SetParam(Events::RevealTile::Reveal::VALUE, 1);
-                // gCoordinator.SendEvent(newEvent);
-                // if (x == 10) {
-                    // x = 1;
-                    // y++;
-                // } else {
-                    // x++;
-                // }
-            // } else {
-                minerSystem->update(event);
-            // }
+            minerSystem->update(event);
         }
 
         window.clear();
         backgroundSystem->update();
         mapSystem->update();
         drawSystem->DrawEntities(&window);
+        textSystem->update(&window);
         window.display();
     }
 }
