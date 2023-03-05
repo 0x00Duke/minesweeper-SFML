@@ -11,6 +11,7 @@
 
 #include "../components/tile.hpp"
 #include "../events/RevealTile.hpp"
+#include "../events/SendTile.hpp"
 
 class MapSystem : public eecsge::System {
     public:

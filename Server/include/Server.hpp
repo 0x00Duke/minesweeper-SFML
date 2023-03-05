@@ -20,6 +20,7 @@
 
 #include "inits.hpp"
 #include "listeners/RevealTile.hpp"
+#include "listeners/SendTile.hpp"
 
 #define MAX_RAW_DATA 256
 #define logl(x) std::cout << x << std::endl
@@ -29,10 +30,7 @@ class Server
 {
 private:
     sf::TcpListener listener;
-    std::vector<sf::TcpSocket *> client_array;
     unsigned short listen_port;
-
-    size_t number_of_clients = 0;
 
     std::shared_ptr<MapSystem> mapSystem;
     std::shared_ptr<ClientsSystem> clientsSystem;
@@ -43,8 +41,4 @@ public:
     void run();
     
     void ConnectClients();
-    void DisconnectClient(sf::TcpSocket *, size_t);
-    void ReceivePacket(sf::TcpSocket *, size_t);
-    void BroadcastPacket(sf::Packet &, sf::IpAddress, unsigned short);
-    void ManagePackets();
 };

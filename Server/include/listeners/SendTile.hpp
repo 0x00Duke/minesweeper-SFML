@@ -13,11 +13,12 @@
 
 #include "../components/tile.hpp"
 #include "../events/SendTile.hpp"
-#include "../systems/map.hpp"
+#include "../systems/clients.hpp"
 
 class SendTileListener {
     public:
-        void init();
+        void init(std::shared_ptr<ClientsSystem> clientsSystem);
     private:
-        void SendTile(std::vector<sf::TcpSocket *> client_array);
+        std::shared_ptr<ClientsSystem> _clientsSystem;
+        void SendTile(eecsge::Event &event);
 };
