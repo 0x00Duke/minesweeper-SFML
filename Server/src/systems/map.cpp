@@ -14,15 +14,15 @@ void MapSystem::update()
     for (auto entity : mEntities) {
         auto &tile = gCoordinator.GetComponent<Tile>(entity);
 
-        if (tile.x == x && tile.y == y) {
+        if (tile.x == y && tile.y == x) {
             if (button == sf::Mouse::Button::Right)
                 tile.sValue = 11;
             else
                 tile.sValue = tile.value;
             
             eecsge::Event event(Events::SendTile::SENDTILE);
-            event.SetParam(Events::SendTile::SendTile::X, std::to_string(tile.x));
-            event.SetParam(Events::SendTile::SendTile::Y, std::to_string(tile.y));
+            event.SetParam(Events::SendTile::SendTile::X, std::to_string(x));
+            event.SetParam(Events::SendTile::SendTile::Y, std::to_string(y));
             event.SetParam(Events::SendTile::SendTile::VALUE, std::to_string(tile.sValue));
             gCoordinator.SendEvent(event);
 
