@@ -26,6 +26,26 @@ Client::~Client()
 {
 }
 
+void Client::emitRevealTileEvent(std::string tile)
+{
+}
+
+void Client::proccessPacket(std::string message)
+{
+    std::string action = message.substr(0, message.find(";"));
+    std::string x = message.substr(message.find(";") + 1, message.length());
+    std::string y = x.substr(x.find(";") + 1, x.length());
+    std::string value = y.substr(y.find(";") + 1, y.length());
+
+    if (action == "reveal") {
+        eecsge::Event newEvent(Events::RevealTile::REVEAL);
+        newEvent.SetParam(Events::RevealTile::Reveal::X, std::stoi(x));
+        newEvent.SetParam(Events::RevealTile::Reveal::Y, std::stoi(y));
+        newEvent.SetParam(Events::RevealTile::Reveal::VALUE, std::stoi(value));
+        gCoordinator.SendEvent(newEvent);
+    }
+}
+
 void Client::ReceivePackets(sf::TcpSocket *socket)
 {
     while (true) {
@@ -34,7 +54,8 @@ void Client::ReceivePackets(sf::TcpSocket *socket)
             std::string sender_address;
             unsigned short sender_port;
             last_packet >> received_string >> sender_address >> sender_port;
-            logl("From (" << sender_address << ":" << sender_port << "): " << received_string);
+            proccessPacket(received_string);
+            // logl("From (" << sender_address << ":" << sender_port << "): " << received_string);
         }
         std::this_thread::sleep_for((std::chrono::milliseconds)250);
     }
@@ -62,7 +83,7 @@ void Client::run()
     initMiner();
 
     ClickListener clickListener;
-    clickListener.init();
+    clickListener.init(&socket);
 
     RevealTileListener revealTileListener;
     revealTileListener.init(mapSystem);
@@ -76,8 +97,12 @@ void Client::run()
     sf::Event event; 
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                socket.disconnect();
+                reception_thred.detach();
                 window.close();
+                return;
+            }
             // if (event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
                 // Event newEvent(Events::RevealTile::REVEAL);
                 // newEvent.SetParam(Events::RevealTile::Reveal::X, x);
@@ -100,16 +125,5 @@ void Client::run()
         mapSystem->update();
         drawSystem->DrawEntities(&window);
         window.display();
-
-        std::string user_input;
-        std::getline(std::cin, user_input);
-        
-        if (user_input.length() < 1)
-            continue;
-        
-        sf::Packet reply_packet;
-        reply_packet << user_input;
-        
-        SendPacket(reply_packet);
     }
 }

@@ -22,7 +22,7 @@ void SendTileListener::SendTile(eecsge::Event &event)
     std::string y = event.GetParam<std::string>(Events::SendTile::SendTile::Y);
     std::string value = event.GetParam<std::string>(Events::SendTile::SendTile::VALUE);
     
-    std::string send_message = x + ";" + y + ";" + value;
+    std::string send_message = "reveal;" + x + ";" + y + ";" + value;
     packet.clear();
     packet << send_message;
 

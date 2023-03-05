@@ -41,7 +41,7 @@ void ClientsSystem::ReceivePacket(Client client, eecsge::Entity entity)
         }
         split_message.push_back(received_message);
 
-        std::cout << split_message[0] << split_message[1] << split_message[2] << std::endl;
+        // std::cout << split_message[0] << split_message[1] << split_message[2] << std::endl;
 
         eecsge::Event event(Events::RevealTile::REVEAL);
         event.SetParam(Events::RevealTile::Reveal::X, std::stoi(split_message[1]));

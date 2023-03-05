@@ -81,8 +81,10 @@ int Lobby::connectionLobby()
     {
         while (_window->pollEvent(event))
         {
-            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 _window->close();
+                return 0;
+            }
             if (event.type == sf::Event::TextEntered) {
                 if (event.text.unicode == 8) {
                     if (ip.getSize() > 0) {

@@ -22,8 +22,8 @@ void MinerSystem::update(sf::Event event)
             if (x <= 0 || y <= 0 || x > 10 || y > 10)
                 return;
             eecsge::Event newEvent(Events::Inputs::CLICK);
-            newEvent.SetParam(Events::Inputs::Click::X, x);
-            newEvent.SetParam(Events::Inputs::Click::Y, y);
+            newEvent.SetParam(Events::Inputs::Click::X, std::to_string(x));
+            newEvent.SetParam(Events::Inputs::Click::Y, std::to_string(y));
             newEvent.SetParam(Events::Inputs::Click::BUTTON, event.mouseButton.button);
 
             gCoordinator.SendEvent(newEvent);

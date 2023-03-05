@@ -45,7 +45,9 @@ private:
     sf::TcpSocket socket;
     sf::Packet last_packet;
 
-    bool isConnected = false;
+    void emitRevealTileEvent(std::string);
+    void proccessPacket(std::string);
+
 public:
     Client(/* args */);
     ~Client();
