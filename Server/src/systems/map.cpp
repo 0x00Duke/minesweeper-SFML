@@ -19,7 +19,7 @@ void MapSystem::update()
                 tile.sValue = 11;
             else
                 tile.sValue = tile.value;
-            
+
             eecsge::Event event(Events::SendTile::SENDTILE);
             event.SetParam(Events::SendTile::SendTile::X, std::to_string(x));
             event.SetParam(Events::SendTile::SendTile::Y, std::to_string(y));

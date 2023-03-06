@@ -69,7 +69,7 @@ int Lobby::connectionLobby()
     inputText.setCharacterSize(45);
     inputText.setFillColor(sf::Color::Black);
     inputText.setString(IP_TEXT);
-    inputText.setPosition(SCREEN_WIDTH / 2 - 350, SCREEN_HEIGHT / 2 - 300);
+    inputText.setPosition(SCREEN_WIDTH / 2 - 350, SCREEN_HEIGHT / 2 - 45);
 
     sf::String ip;
 
