@@ -80,7 +80,7 @@ void Client::SendPacket(sf::Packet &packet)
 void Client::run()
 {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Minesweeper");
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Minesweeper", sf::Style::Titlebar | sf::Style::Close);
 
     Lobby lobby(&window, &socket);
     int lobbyStatus = lobby.connectionLobby();
