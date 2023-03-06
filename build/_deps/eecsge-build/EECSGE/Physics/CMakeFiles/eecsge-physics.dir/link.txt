@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libeecsge-physics.a "CMakeFiles/eecsge-physics.dir/dummy.cpp.o"
-/Library/Developer/CommandLineTools/usr/bin/ranlib libeecsge-physics.a

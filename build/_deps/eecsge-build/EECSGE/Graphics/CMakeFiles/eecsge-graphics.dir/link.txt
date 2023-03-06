@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libeecsge-graphics.a "CMakeFiles/eecsge-graphics.dir/systems/src/draw.cpp.o" "CMakeFiles/eecsge-graphics.dir/systems/src/animation.cpp.o"
-/Library/Developer/CommandLineTools/usr/bin/ranlib libeecsge-graphics.a

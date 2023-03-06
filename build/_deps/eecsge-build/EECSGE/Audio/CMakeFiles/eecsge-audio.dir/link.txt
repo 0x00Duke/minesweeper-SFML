@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libeecsge-audio.a "CMakeFiles/eecsge-audio.dir/systems/src/sound.cpp.o"
-/Library/Developer/CommandLineTools/usr/bin/ranlib libeecsge-audio.a
