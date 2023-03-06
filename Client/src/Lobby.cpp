@@ -44,6 +44,10 @@ bool Lobby::connectToServer(sf::String ip)
 
     unsigned short port = (unsigned short) strtoul(std::get<1>(ipTuple).c_str(), NULL, 0);
 
+    // std::cout << "Connecting to " << std::get<0>(ipTuple) << ":" << port << std::endl;
+
+    // sf::IpAddress server(std::get<0>(ipTuple));
+
     if (_socket->connect(std::get<0>(ipTuple), port) != sf::Socket::Done) {
         logl("Could not connect to the server\n");
         return false;
@@ -91,7 +95,7 @@ int Lobby::connectionLobby()
                     if (ip.getSize() > 0 && connectToServer(ip)) {
 
                         inputText.setString("Connected to server");
-                        inputText.setPosition(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2 - 50);
+                        inputText.setPosition(SCREEN_WIDTH / 2 - 250, SCREEN_HEIGHT / 2 - 50);
                         _window->clear(sf::Color::White);
                         _window->draw(inputText);
                         _window->display();

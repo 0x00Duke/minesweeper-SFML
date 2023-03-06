@@ -13,6 +13,7 @@
 
 #include <EECSGE/Physics.hpp>
 #include "../events/Input.hpp"
+#include "../macros.hpp"
 
 
 class MinerSystem : public eecsge::System {

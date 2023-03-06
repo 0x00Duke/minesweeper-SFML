@@ -39,6 +39,6 @@ void EndGameListener::callEndGame(eecsge::Event &event)
                                               font,
                                               color,
                                               100,
-                                              200,
+                                              350,
                                               300});
 }

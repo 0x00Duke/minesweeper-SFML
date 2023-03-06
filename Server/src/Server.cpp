@@ -13,8 +13,15 @@ Server::Server(unsigned short port) : listen_port(port)
 {
     std::cout << "Server started on port " << listen_port << std::endl;
 
+    // get the ip address of the server
+    // sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+    // sf::IpAddress ip2 = sf::IpAddress::getPublicAddress();
+    // std::cout << "Server ip: " << ip << std::endl;
+    // std::cout << "Server public ip: " << ip2 << std::endl;
+
     if (listener.listen(listen_port) != sf::Socket::Done) {
         logl("Could not listen");
+        exit(84);
     }
 
     gCoordinator.Init();

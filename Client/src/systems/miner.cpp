@@ -16,8 +16,8 @@ void MinerSystem::update(sf::Event event)
         auto &click = gCoordinator.GetComponent<Click>(entity);
 
         if (event.type == sf::Event::MouseButtonReleased) {
-            int x = event.mouseButton.x / 64;
-            int y = event.mouseButton.y / 64;
+            int x = event.mouseButton.x / (32*SCALE);
+            int y = event.mouseButton.y / (32*SCALE);
 
             if (x <= 0 || y <= 0 || x > 10 || y > 10)
                 return;

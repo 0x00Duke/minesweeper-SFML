@@ -91,7 +91,7 @@ int initTiles()
                                                 sf::Vector2f(0, 0),                         // acceleration
                                                 sf::Vector2f(0, 0),                         // bounds
                                                 sf::Vector2f(0, 0),                         // rotation
-                                                sf::Vector2f(2, 2),                         // scale
+                                                sf::Vector2f(SCALE, SCALE),                         // scale
                                                 false                                       // hasCollision
                                             });
             gCoordinator.AddComponent(tile, Drawable{
